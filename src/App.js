@@ -83,7 +83,12 @@ export default function Game() {
   });
 
   return (
+    <>
+      <div>
+        <h1>Welcome to Chloe's Tic-Tac-Toe Game</h1>
+        </div>
     <div className="game">
+
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
@@ -91,6 +96,7 @@ export default function Game() {
         <ol>{moves}</ol>
       </div>
     </div>
+    </>
   );
 }
 
