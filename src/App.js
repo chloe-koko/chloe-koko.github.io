@@ -85,7 +85,7 @@ export default function Game() {
   return (
     <>
       <div>
-        <h1>Welcome to Chloe's Tic-Tac-Toe Game</h1>
+        <h1>WELCOME! to ChLoE's Tic-Tac-Toe Game$$$$$$$.....</h1>
         </div>
     <div className="game">
 

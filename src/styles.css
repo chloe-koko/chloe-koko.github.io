@@ -77,6 +77,10 @@
     display: table;
   }
 
+  .board-row {
+    text-align: center;
+  }
+
   .status {
     margin-bottom: 10px;
   }
