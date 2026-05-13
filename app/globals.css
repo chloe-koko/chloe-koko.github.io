@@ -12,15 +12,99 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── shared content container ─────────────────────────────── */
+.page-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── site-wide header ─────────────────────────────────────── */
+.site-header {
+  padding: 28px 0 20px;
+  background: #fff;
+}
+
+.header-logo-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+}
+
+.header-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #be185d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+/* ── site-wide footer ─────────────────────────────────────── */
+.site-footer {
+  padding: 0 0 32px;
+  background: #fff;
+}
+
+.footer-rule {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+  margin: 24px 0 12px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.site-footer a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.site-footer a:hover { color: #6d28d9; }
+
+.footer-pipe {
+  color: #d1d5db;
+  user-select: none;
+}
+
+/* ── home page ────────────────────────────────────────────── */
+.home-main {
+  padding: 32px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+}
+
+.home-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.home-body a { color: #6d28d9; text-decoration: none; }
+.home-body a:hover { text-decoration: underline; }

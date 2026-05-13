@@ -1,0 +1,306 @@
+* { box-sizing: border-box; }
+
+/* ── page wrapper ─────────────────────────────────────────── */
+.bridges-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #111827;
+  background: #fff;
+}
+
+.bridges-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.back-link {
+  font-size: 0.9rem;
+  color: #4c1d95;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.back-link:hover { text-decoration: underline; }
+
+.bridges-title {
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #4338ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+/* ── story text ───────────────────────────────────────────── */
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.story strong { color: #4c1d95; }
+.story em     { color: #4c1d95; }
+
+.story-cta {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #a855f7;
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  font-weight: 600;
+  color: #4c1d95;
+}
+
+/* ── map ──────────────────────────────────────────────────── */
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.map-svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* bridges */
+.bridge-path {
+  fill: none;
+  stroke: #d1d5db;
+  stroke-width: 7;
+  stroke-linecap: round;
+  cursor: pointer;
+  transition: stroke 0.15s, stroke-width 0.15s;
+}
+.bridge-hit { cursor: pointer; }
+.bridge-available { stroke: #a855f7; stroke-width: 8; }
+.bridge-available:hover { stroke: #7c3aed; stroke-width: 10; }
+.bridge-crossed { stroke: #e5e7eb; stroke-width: 6; opacity: 0.6; }
+
+/* bridge label circles */
+.label-circle {
+  fill: #fff;
+  stroke: #a855f7;
+  stroke-width: 2.5;
+}
+.label-circle-done {
+  fill: #a855f7;
+  stroke: #7c3aed;
+  stroke-width: 2;
+}
+.label-text {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #5b21b6;
+  pointer-events: none;
+  user-select: none;
+}
+.label-circle-done ~ .label-text { fill: #fff; }
+.bridge-label-g:hover .label-circle { fill: #faf5ff; }
+
+/* nodes */
+.node {
+  fill: #7c3aed;
+  stroke: #fff;
+  stroke-width: 3;
+  filter: drop-shadow(0 2px 4px rgba(124,58,237,0.2));
+}
+.node-active {
+  fill: #f59e0b;
+  stroke: #fff;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px rgba(245,158,11,0.5));
+}
+.node-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #6b7280;
+}
+.node-id {
+  font-size: 16px;
+  font-weight: 900;
+  fill: #fff;
+  pointer-events: none;
+  user-select: none;
+}
+.you-are-here {
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* shake animation */
+.shake { animation: shake 0.55s cubic-bezier(.36,.07,.19,.97); }
+@keyframes shake {
+  10%, 90%  { transform: translateX(-2px); }
+  20%, 80%  { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60%  { transform: translateX(6px); }
+}
+
+/* status message */
+.map-msg {
+  min-height: 1.8rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #4c1d95;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.map-msg-visible { opacity: 1; }
+
+/* walk path tracker */
+.walk-path {
+  font-size: 0.95rem;
+  color: #4b5563;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 8px 16px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.6;
+}
+.walk-label { font-weight: 700; color: #4c1d95; }
+.walk-node  { font-weight: 800; color: #4c1d95; }
+.walk-arrow { color: #9ca3af; }
+.walk-stuck { color: #ef4444; font-weight: 700; }
+
+/* action buttons */
+.map-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-reset-map {
+  padding: 10px 24px;
+  background: #fff;
+  color: #4c1d95;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.btn-reset-map:hover { border-color: #c4b5fd; background: #faf5ff; }
+
+.btn-explain {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(124,58,237,0.2);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.btn-explain:hover { transform: scale(1.03); box-shadow: 0 5px 16px rgba(124,58,237,0.3); }
+
+/* hint */
+.hint-bar {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ── Euler's explanation ──────────────────────────────────── */
+.euler-reveal {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.euler-reveal h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #4c1d95;
+  margin-bottom: 4px;
+}
+
+.euler-reveal strong { color: #4c1d95; }
+.euler-reveal em     { font-style: italic; color: #4c1d95; }
+
+/* degree table */
+.degree-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fafafa;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.degree-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.degree-node {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #fff;
+  background: #7c3aed;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.degree-name    { font-weight: 600; color: #4b5563; }
+.degree-bridges { color: #9ca3af; letter-spacing: 2px; }
+.degree-count   { font-weight: 700; color: #4b5563; white-space: nowrap; }
+.degree-odd     { color: #dc2626; }
+
+.euler-conclusion {
+  background: #fff;
+  border: 1px solid #fca5a5;
+  border-left: 4px solid #ef4444;
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  font-size: 1.05rem;
+  color: #7f1d1d;
+}
+
+.euler-sign {
+  font-style: italic;
+  color: #4c1d95;
+  font-weight: 600;
+  text-align: right;
+}

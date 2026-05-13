@@ -1,123 +1,131 @@
 "use client";
-
 import { useState } from 'react';
+import './styles.css';
 
-function Square({ value, onSquareClick }) {
-    return (
-        <button className="square" onClick={onSquareClick}>
-            {value}
-        </button>
-    );
+const LINES = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6],
+];
+
+function findWinner(squares) {
+  for (const [a,b,c] of LINES) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
+      return { symbol: squares[a], line: [a,b,c] };
+  }
+  return null;
 }
 
-function Board({ xIsNext, squares, onPlay }) {
-    function handleClick(i) {
-        if (calculateWinner(squares) || squares[i]) {
-            return;
-        }
-        const nextSquares = squares.slice();
-        if (xIsNext) {
-            nextSquares[i] = 'X';
-        } else {
-            nextSquares[i] = 'O';
-        }
-        onPlay(nextSquares);
-    }
-
-    const winner = calculateWinner(squares);
-    let status;
-    if (winner) {
-        status = 'Winner: ' + winner;
-    } else {
-        status = 'Next player: ' + (xIsNext ? 'X' : 'O');
-    }
-
-    return (
-        <>
-            <div className="status">{status}</div>
-            <div className="board-row">
-                <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-                <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-                <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-            </div>
-            <div className="board-row">
-                <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-                <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-                <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-            </div>
-            <div className="board-row">
-                <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-                <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-                <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-            </div>
-        </>
-    );
+function Square({ value, onClick, highlight }) {
+  return (
+    <button
+      className={[
+        'square',
+        value === 'X' ? 'sq-x' : value === 'O' ? 'sq-o' : '',
+        highlight ? 'sq-win' : '',
+      ].filter(Boolean).join(' ')}
+      onClick={onClick}
+    >
+      {value}
+    </button>
+  );
 }
 
 export default function Game() {
-    const [history, setHistory] = useState([Array(9).fill(null)]);
-    const [currentMove, setCurrentMove] = useState(0);
-    const xIsNext = currentMove % 2 === 0;
-    const currentSquares = history[currentMove];
+  const [names, setNames]     = useState(['Player 1', 'Player 2']);
+  const [editing, setEditing] = useState(null);
+  const [scores, setScores]   = useState([0, 0]);
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
-    function handlePlay(nextSquares) {
-        const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-        setHistory(nextHistory);
-        setCurrentMove(nextHistory.length - 1);
-    }
+  const result  = findWinner(squares);
+  const isDraw  = !result && squares.every(Boolean);
+  const isOver  = !!(result || isDraw);
+  const winLine = result?.line ?? [];
 
-    function jumpTo(nextMove) {
-        setCurrentMove(nextMove);
-    }
+  function handleClick(i) {
+    if (result || squares[i] || isDraw) return;
+    const next = squares.slice();
+    next[i] = xIsNext ? 'X' : 'O';
+    const r = findWinner(next);
+    if (r) setScores(s => { const n = [...s]; n[r.symbol === 'X' ? 0 : 1]++; return n; });
+    setSquares(next);
+    if (!r && !next.every(Boolean)) setXIsNext(x => !x);
+  }
 
-    const moves = history.map((squares, move) => {
-        let description;
-        if (move > 0) {
-            description = 'Go to move #' + move;
-        } else {
-            description = 'Go to game start';
-        }
-        return (
-            <li key={move}>
-                <button onClick={() => jumpTo(move)}>{description}</button>
-            </li>
-        );
-    });
+  function newGame() {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+  }
 
-    return (
-        <>
-            <div>
-                <h1>WELCOME! to Chloe's Tic-Tac-Toe Game</h1>
-            </div>
-            <div className="game">
+  function updateName(idx, val) {
+    const trimmed = val.trim();
+    setNames(n => { const next = [...n]; next[idx] = trimmed || (idx === 0 ? 'Player 1' : 'Player 2'); return next; });
+    setEditing(null);
+  }
 
-                <div className="game-board">
-                    <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-                </div>
-                <div className="game-info">
-                    <ol>{moves}</ol>
-                </div>
-            </div>
-        </>
-    );
-}
+  let status;
+  if (result) {
+    status = `🎉 ${result.symbol === 'X' ? names[0] : names[1]} wins!`;
+  } else if (isDraw) {
+    status = "It's a draw! 🤝";
+  } else {
+    const name = xIsNext ? names[0] : names[1];
+    const sym  = xIsNext ? 'X' : 'O';
+    status = `${name}'s turn (${sym})`;
+  }
 
-function calculateWinner(squares) {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
-        }
-    }
-    return null;
+  return (
+    <div className="game-wrap">
+      <h1 className="game-title">Tic ❌ Tac ⭕ Toe</h1>
+
+      <div className="players">
+        {[0, 1].map(i => (
+          <div
+            key={i}
+            className={[
+              'pcard',
+              i === 0 ? 'pcard-x' : 'pcard-o',
+              !isOver && (i === 0) === xIsNext ? 'pcard-active' : '',
+            ].filter(Boolean).join(' ')}
+          >
+            <span className="p-symbol">{i === 0 ? 'X' : 'O'}</span>
+
+            {editing === i ? (
+              <input
+                autoFocus
+                defaultValue={names[i]}
+                className="name-input"
+                onBlur={e => updateName(i, e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && updateName(i, e.target.value)}
+              />
+            ) : (
+              <button className="p-name" onClick={() => setEditing(i)} title="Tap to rename">
+                {names[i]} <span className="edit-icon">✏️</span>
+              </button>
+            )}
+
+            <span className="p-score">{scores[i]}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="status-bar">{status}</div>
+
+      <div className="board">
+        {squares.map((val, i) => (
+          <Square key={i} value={val} onClick={() => handleClick(i)} highlight={winLine.includes(i)} />
+        ))}
+      </div>
+
+      <div className="actions">
+        <button className="btn-primary" onClick={newGame}>
+          {isOver ? '▶ Play Again' : '↺ New Game'}
+        </button>
+        <button className="btn-secondary" onClick={() => { newGame(); setScores([0, 0]); }}>
+          Reset Scores
+        </button>
+      </div>
+    </div>
+  );
 }
