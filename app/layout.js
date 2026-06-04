@@ -36,6 +36,8 @@ export default function RootLayout({ children }) {
             <div className="footer-links">
               <a href="https://kokona.website" target="_blank" rel="noopener noreferrer">Kokona Website</a>
               <span className="footer-pipe">|</span>
+              <Link href="/math">🔢 Math</Link>
+              <span className="footer-pipe">|</span>
               <Link href="/bridges">🌉 Bridges</Link>
               <span className="footer-pipe">|</span>
               <Link href="/blogs">📝 Blog</Link>
