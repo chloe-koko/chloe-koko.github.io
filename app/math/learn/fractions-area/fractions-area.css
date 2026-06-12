@@ -1,0 +1,211 @@
+/* ── Page wrapper ────────────────────────────────────── */
+.fa-wrap {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────── */
+.fa-breadcrumb {
+  padding-top: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+.fa-breadcrumb a {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.fa-breadcrumb a:hover { color: #7c3aed; }
+
+/* ── Header ──────────────────────────────────────────── */
+.fa-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.fa-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+.fa-subtitle {
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Sections ────────────────────────────────────────── */
+.fa-section {
+  margin-bottom: 3.5rem;
+}
+
+/* ── Station headers ─────────────────────────────────── */
+.fa-station-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.fa-station-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #7c3aed;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.fa-station-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.2rem;
+}
+.fa-station-desc {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* ── Problem grids ───────────────────────────────────── */
+.fa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.fa-area-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.fa-word-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Problem box ─────────────────────────────────────── */
+.fa-problem {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1rem;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.fa-prob-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.fa-prob-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── KaTeX block display ─────────────────────────────── */
+.k-block {
+  display: block;
+  text-align: center;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+.k-inline { display: inline; }
+
+/* ── Answer blank ────────────────────────────────────── */
+.fa-answer-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+.fa-blank {
+  display: inline-block;
+  width: 100px;
+  border-bottom: 2px solid #d1d5db;
+  height: 1.3em;
+  flex-shrink: 0;
+}
+.fa-blank-lg { width: 180px; }
+
+/* ── Word problem text ───────────────────────────────── */
+.fa-word-text {
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.8;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Challenge section ───────────────────────────────── */
+.fa-challenge {
+  background: #fffbeb;
+  border: 1.5px solid #fde68a;
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 1rem;
+}
+.fa-challenge .fa-problem { background: #fff; }
+.fa-challenge .fa-station-num { background: #d97706; }
+
+/* ── Footer ──────────────────────────────────────────── */
+.fa-footer-note {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  color: #166534;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.fa-footer-emoji { font-size: 1.4rem; }
+.fa-footer-nav {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+}
+.fa-back-link {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7c3aed;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.fa-back-link:hover { color: #6d28d9; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 560px) {
+  .fa-grid,
+  .fa-area-grid {
+    grid-template-columns: 1fr;
+  }
+}

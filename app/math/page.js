@@ -16,6 +16,15 @@ const TOPICS = [
     ready: true,
   },
   {
+    emoji: '✏️',
+    tag: '5th Grade · Practice',
+    title: 'Fractions, Decimals & Area',
+    desc: 'Ten practice sessions: fraction operations, decimal arithmetic, and area of rectangles with fractional and decimal side lengths.',
+    href: '/math/5th-grade',
+    cta: 'Open practice →',
+    ready: true,
+  },
+  {
     emoji: '🌉',
     tag: 'Graph Theory',
     title: 'Königsberg Bridges',
